@@ -149,6 +149,7 @@
             font-size: 1.8rem;
             font-weight: 600;
             color: var(--secondary);
+            cursor: pointer;
         }
 
         .nav-links {
@@ -167,6 +168,7 @@
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            cursor: pointer;
         }
 
         .nav-links a:after {
@@ -239,6 +241,7 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .mobile-dropdown a:hover {
@@ -246,17 +249,32 @@
             color: var(--accent);
         }
 
-        /* Home Page */
-        #home {
+        /* Hero Section */
+        .hero-section {
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             background-color: var(--primary);
+            min-height: calc(100vh - 80px);
+            margin-top: 80px;
+            transition: all 0.5s ease;
         }
 
         .hero-content {
             max-width: 800px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .hero-content h1 {
@@ -516,35 +534,35 @@
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <a href="#home" class="logo">Luna Nails</a>
+            <a class="logo" id="home-link">Luna Nails</a>
             <ul class="nav-links">
-                <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
-                <li><a href="#about" class="nav-link" data-page="about">About</a></li>
-                <li><a href="#services" class="nav-link" data-page="services">Services</a></li>
-                <li><a href="#portfolio" class="nav-link" data-page="portfolio">Portfolio</a></li>
-                <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
+                <li><a class="nav-link active" data-page="home">Home</a></li>
+                <li><a class="nav-link" data-page="about">About</a></li>
+                <li><a class="nav-link" data-page="services">Services</a></li>
+                <li><a class="nav-link" data-page="portfolio">Portfolio</a></li>
+                <li><a class="nav-link" data-page="contact">Contact</a></li>
             </ul>
             <div class="mobile-menu">
                 <i class="fas fa-bars"></i>
                 <div class="mobile-dropdown">
                     <ul>
-                        <li><a href="#home" data-page="home">Home</a></li>
-                        <li><a href="#about" data-page="about">About</a></li>
-                        <li><a href="#services" data-page="services">Services</a></li>
-                        <li><a href="#portfolio" data-page="portfolio">Portfolio</a></li>
-                        <li><a href="#contact" data-page="contact">Contact</a></li>
+                        <li><a data-page="home">Home</a></li>
+                        <li><a data-page="about">About</a></li>
+                        <li><a data-page="services">Services</a></li>
+                        <li><a data-page="portfolio">Portfolio</a></li>
+                        <li><a data-page="contact">Contact</a></li>
                     </ul>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Home Page -->
-    <section id="home" class="page active">
+    <!-- Hero Section (Dynamic) -->
+    <section id="hero" class="hero-section">
         <div class="container hero-content">
-            <h1>Minimalist Nail Artistry</h1>
-            <p>Elevating natural beauty through precision, care, and minimalist design. Each nail tells a story of elegance and sophistication.</p>
-            <a href="#portfolio" class="btn view-work-btn">View Our Work</a>
+            <h1 id="hero-title">Minimalist Nail Artistry</h1>
+            <p id="hero-description">Elevating natural beauty through precision, care, and minimalist design. Each nail tells a story of elegance and sophistication.</p>
+            <a class="btn view-work-btn" id="hero-button">View Our Work</a>
         </div>
     </section>
 
@@ -561,7 +579,7 @@
                     <p>With over five years of dedicated experience in nail artistry, I've developed a unique approach that combines technical skill with an artistic eye. My philosophy centers on enhancing natural beauty rather than masking it.</p>
                     <p>I specialize in minimalist nail designs that emphasize clean lines, subtle textures, and sophisticated color palettes. Each service is a personalized experience, tailored to your preferences and lifestyle.</p>
                     <p>My studio is designed as a tranquil space where you can unwind while receiving exceptional nail care. I use only the highest quality, ethically-sourced products that are gentle on your nails and the environment.</p>
-                    <a href="#contact" class="btn">Book a Consultation</a>
+                    <a class="btn" id="about-contact-btn">Book a Consultation</a>
                 </div>
             </div>
         </div>
@@ -735,21 +753,21 @@
                 <div class="footer-column">
                     <h3>Navigation</h3>
                     <ul>
-                        <li><a href="#home" data-page="home">Home</a></li>
-                        <li><a href="#about" data-page="about">About</a></li>
-                        <li><a href="#services" data-page="services">Services</a></li>
-                        <li><a href="#portfolio" data-page="portfolio">Portfolio</a></li>
-                        <li><a href="#contact" data-page="contact">Contact</a></li>
+                        <li><a data-page="home">Home</a></li>
+                        <li><a data-page="about">About</a></li>
+                        <li><a data-page="services">Services</a></li>
+                        <li><a data-page="portfolio">Portfolio</a></li>
+                        <li><a data-page="contact">Contact</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Services</h3>
                     <ul>
-                        <li><a href="#services" data-page="services">Natural Manicure</a></li>
-                        <li><a href="#services" data-page="services">Soft Gel Polish</a></li>
-                        <li><a href="#services" data-page="services">Minimalist Art</a></li>
-                        <li><a href="#services" data-page="services">Nail Care</a></li>
+                        <li><a data-page="services">Natural Manicure</a></li>
+                        <li><a data-page="services">Soft Gel Polish</a></li>
+                        <li><a data-page="services">Minimalist Art</a></li>
+                        <li><a data-page="services">Nail Care</a></li>
                     </ul>
                 </div>
                 
@@ -768,30 +786,82 @@
     </footer>
 
     <script>
+        // Hero content for each page
+        const heroContent = {
+            home: {
+                title: "Minimalist Nail Artistry",
+                description: "Elevating natural beauty through precision, care, and minimalist design. Each nail tells a story of elegance and sophistication.",
+                buttonText: "View Our Work",
+                buttonPage: "portfolio"
+            },
+            about: {
+                title: "About Luna Nails",
+                description: "Discover the artistry behind our minimalist approach. Learn about our philosophy, techniques, and commitment to natural beauty.",
+                buttonText: "Book a Consultation",
+                buttonPage: "contact"
+            },
+            services: {
+                title: "Our Services",
+                description: "From natural manicures to minimalist nail art, explore our carefully crafted services designed to enhance your natural beauty.",
+                buttonText: "View Portfolio",
+                buttonPage: "portfolio"
+            },
+            portfolio: {
+                title: "Our Portfolio",
+                description: "Browse our collection of minimalist nail designs. Each piece showcases precision, elegance, and understated beauty.",
+                buttonText: "Book an Appointment",
+                buttonPage: "contact"
+            },
+            contact: {
+                title: "Get In Touch",
+                description: "Ready to experience minimalist nail artistry? Contact us to schedule your appointment or consultation.",
+                buttonText: "Send Message",
+                buttonPage: "contact"
+            }
+        };
+
         // Page Navigation
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.nav-link, .mobile-dropdown a, .footer-column a[data-page]');
             const pages = document.querySelectorAll('.page');
+            const heroSection = document.getElementById('hero');
+            const heroTitle = document.getElementById('hero-title');
+            const heroDescription = document.getElementById('hero-description');
+            const heroButton = document.getElementById('hero-button');
+            const homeLink = document.getElementById('home-link');
+            const aboutContactBtn = document.getElementById('about-contact-btn');
             
             // Show home page by default
             showPage('home');
+            updateHeroContent('home');
             
             // Add click event to navigation links
             navLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
                     const pageId = this.getAttribute('data-page');
-                    
-                    // Update active nav link
-                    navLinks.forEach(nav => nav.classList.remove('active'));
-                    this.classList.add('active');
-                    
-                    // Show selected page
-                    showPage(pageId);
-                    
-                    // Close mobile menu if open
-                    document.querySelector('.mobile-dropdown').classList.remove('active');
+                    navigateToPage(pageId);
                 });
+            });
+            
+            // Home logo link
+            homeLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                navigateToPage('home');
+            });
+            
+            // About page contact button
+            aboutContactBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                navigateToPage('contact');
+            });
+            
+            // Hero button
+            heroButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                const currentPage = document.querySelector('.nav-link.active').getAttribute('data-page');
+                const targetPage = heroContent[currentPage].buttonPage;
+                navigateToPage(targetPage);
             });
             
             // Mobile menu toggle
@@ -805,16 +875,6 @@
                 document.querySelector('.mobile-dropdown').classList.remove('active');
             });
             
-            // View work button
-            document.querySelector('.view-work-btn').addEventListener('click', function(e) {
-                e.preventDefault();
-                showPage('portfolio');
-                
-                // Update active nav link
-                navLinks.forEach(nav => nav.classList.remove('active'));
-                document.querySelector('[data-page="portfolio"]').classList.add('active');
-            });
-            
             // Form submission
             document.getElementById('contactForm').addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -822,20 +882,54 @@
                 this.reset();
             });
             
+            function navigateToPage(pageId) {
+                // Update active nav link
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                document.querySelectorAll(`[data-page="${pageId}"]`).forEach(link => {
+                    link.classList.add('active');
+                });
+                
+                // Show selected page and update hero
+                showPage(pageId);
+                updateHeroContent(pageId);
+                
+                // Close mobile menu if open
+                document.querySelector('.mobile-dropdown').classList.remove('active');
+            }
+            
             function showPage(pageId) {
                 // Hide all pages
                 pages.forEach(page => {
                     page.classList.remove('active');
                 });
                 
-                // Show selected page
-                document.getElementById(pageId).classList.add('active');
+                // If not home page, show the page content
+                if (pageId !== 'home') {
+                    document.getElementById(pageId).classList.add('active');
+                }
                 
                 // Scroll to top
                 window.scrollTo(0, 0);
                 
                 // Lazy load images on the active page
                 lazyLoadImages();
+            }
+            
+            function updateHeroContent(pageId) {
+                const content = heroContent[pageId];
+                if (content) {
+                    // Add loading animation
+                    heroSection.style.opacity = '0.7';
+                    
+                    setTimeout(() => {
+                        heroTitle.textContent = content.title;
+                        heroDescription.textContent = content.description;
+                        heroButton.textContent = content.buttonText;
+                        
+                        // Remove loading animation
+                        heroSection.style.opacity = '1';
+                    }, 300);
+                }
             }
             
             // Lazy load images
