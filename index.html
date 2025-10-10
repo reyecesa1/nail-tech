@@ -318,7 +318,7 @@
             margin-bottom: 20px;
         }
 
-        /* Services Page */
+        /* Services Page - Auto Carousel for Desktop, Grid for Mobile */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -332,6 +332,8 @@
             transition: var(--transition);
             border: 1px solid var(--gray);
             cursor: pointer;
+            flex-shrink: 0;
+            width: 300px;
         }
 
         .service-card:hover {
@@ -349,16 +351,39 @@
             margin-bottom: 15px;
         }
 
-        /* Portfolio Page */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        /* Services Auto Carousel for Desktop */
+        .services-carousel-container {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .services-carousel-track {
+            display: flex;
             gap: 30px;
+            transition: transform 0.5s ease;
+            padding: 10px 0;
+        }
+
+        /* Portfolio Auto Carousel for Desktop */
+        .portfolio-carousel-container {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .portfolio-carousel-track {
+            display: flex;
+            gap: 30px;
+            transition: transform 0.5s ease;
+            padding: 10px 0;
         }
 
         .portfolio-item {
             position: relative;
             overflow: hidden;
+            flex-shrink: 0;
+            width: 300px;
         }
 
         .portfolio-item img {
@@ -524,6 +549,30 @@
             .section {
                 padding: 60px 0;
             }
+            
+            /* Hide carousels on mobile, show grid */
+            .services-carousel-container,
+            .portfolio-carousel-container {
+                display: none;
+            }
+            
+            .services-grid,
+            .portfolio-grid {
+                display: grid;
+            }
+        }
+
+        @media (min-width: 769px) {
+            /* Hide grid on desktop, show carousels */
+            .services-grid,
+            .portfolio-grid {
+                display: none;
+            }
+            
+            .services-carousel-container,
+            .portfolio-carousel-container {
+                display: block;
+            }
         }
 
         @media (max-width: 576px) {
@@ -596,6 +645,8 @@
     <section id="services" class="page">
         <div class="container section">
             <h2 class="section-title">Services</h2>
+            
+            <!-- Services Grid for Mobile -->
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
@@ -630,6 +681,13 @@
                     <p class="price">$55</p>
                 </div>
             </div>
+            
+            <!-- Services Carousel for Desktop -->
+            <div class="services-carousel-container">
+                <div class="services-carousel-track" id="services-carousel">
+                    <!-- Service cards will be duplicated here by JavaScript -->
+                </div>
+            </div>
         </div>
     </section>
 
@@ -637,6 +695,8 @@
     <section id="portfolio" class="page">
         <div class="container section">
             <h2 class="section-title">Portfolio</h2>
+            
+            <!-- Portfolio Grid for Mobile -->
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Minimalist French" class="lazy">
@@ -655,6 +715,13 @@
                 </div>
                 <div class="portfolio-item">
                     <img data-src="https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern French" class="lazy">
+                </div>
+            </div>
+            
+            <!-- Portfolio Carousel for Desktop -->
+            <div class="portfolio-carousel-container">
+                <div class="portfolio-carousel-track" id="portfolio-carousel">
+                    <!-- Portfolio items will be duplicated here by JavaScript -->
                 </div>
             </div>
         </div>
@@ -827,6 +894,94 @@
             }
         };
 
+        // Auto Carousel Functionality
+        function initAutoCarousels() {
+            // Only initialize on desktop
+            if (window.innerWidth <= 768) return;
+            
+            // Services Carousel
+            const servicesCarousel = document.getElementById('services-carousel');
+            const servicesGrid = document.querySelector('.services-grid');
+            
+            if (servicesCarousel && servicesGrid) {
+                // Clone service cards for infinite loop
+                const serviceCards = servicesGrid.querySelectorAll('.service-card');
+                serviceCards.forEach(card => {
+                    const clone = card.cloneNode(true);
+                    servicesCarousel.appendChild(clone);
+                });
+                
+                // Duplicate the cards for seamless looping
+                serviceCards.forEach(card => {
+                    const clone = card.cloneNode(true);
+                    servicesCarousel.appendChild(clone);
+                });
+                
+                // Set up animation
+                let servicesPosition = 0;
+                const servicesSpeed = 0.5; // pixels per frame (slower for readability)
+                const servicesInterval = 16; // ~60fps
+                
+                function animateServices() {
+                    servicesPosition -= servicesSpeed;
+                    
+                    // Reset position when we've scrolled through one set of cards
+                    const cardWidth = 300 + 30; // width + gap
+                    const totalWidth = serviceCards.length * cardWidth;
+                    
+                    if (Math.abs(servicesPosition) >= totalWidth) {
+                        servicesPosition = 0;
+                    }
+                    
+                    servicesCarousel.style.transform = `translateX(${servicesPosition}px)`;
+                    requestAnimationFrame(animateServices);
+                }
+                
+                animateServices();
+            }
+            
+            // Portfolio Carousel
+            const portfolioCarousel = document.getElementById('portfolio-carousel');
+            const portfolioGrid = document.querySelector('.portfolio-grid');
+            
+            if (portfolioCarousel && portfolioGrid) {
+                // Clone portfolio items for infinite loop
+                const portfolioItems = portfolioGrid.querySelectorAll('.portfolio-item');
+                portfolioItems.forEach(item => {
+                    const clone = item.cloneNode(true);
+                    portfolioCarousel.appendChild(clone);
+                });
+                
+                // Duplicate the items for seamless looping
+                portfolioItems.forEach(item => {
+                    const clone = item.cloneNode(true);
+                    portfolioCarousel.appendChild(clone);
+                });
+                
+                // Set up animation
+                let portfolioPosition = 0;
+                const portfolioSpeed = 0.7; // pixels per frame
+                const portfolioInterval = 16; // ~60fps
+                
+                function animatePortfolio() {
+                    portfolioPosition -= portfolioSpeed;
+                    
+                    // Reset position when we've scrolled through one set of items
+                    const itemWidth = 300 + 30; // width + gap
+                    const totalWidth = portfolioItems.length * itemWidth;
+                    
+                    if (Math.abs(portfolioPosition) >= totalWidth) {
+                        portfolioPosition = 0;
+                    }
+                    
+                    portfolioCarousel.style.transform = `translateX(${portfolioPosition}px)`;
+                    requestAnimationFrame(animatePortfolio);
+                }
+                
+                animatePortfolio();
+            }
+        }
+
         // Page Navigation
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('.nav-link, .mobile-dropdown a, .footer-column a[data-page]');
@@ -843,6 +998,12 @@
             // Show home page by default
             showPage('home');
             updateHeroContent('home');
+            
+            // Initialize auto carousels
+            initAutoCarousels();
+            
+            // Reinitialize carousels on window resize
+            window.addEventListener('resize', initAutoCarousels);
             
             // Add click event to navigation links
             navLinks.forEach(link => {
