@@ -53,6 +53,12 @@
         img {
             max-width: 100%;
             height: auto;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        img.loaded {
+            opacity: 1;
         }
 
         .container {
@@ -83,9 +89,15 @@
 
         /* Page Structure */
         .page {
-            display: none;
             min-height: 100vh;
             padding-top: 80px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .page.active {
@@ -188,6 +200,50 @@
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            position: relative;
+        }
+
+        /* Mobile Dropdown Menu */
+        .mobile-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 200px;
+            background-color: var(--light);
+            border: 1px solid var(--gray);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 1001;
+        }
+
+        .mobile-dropdown.active {
+            display: block;
+        }
+
+        .mobile-dropdown ul {
+            list-style: none;
+        }
+
+        .mobile-dropdown li {
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .mobile-dropdown li:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-dropdown a {
+            display: block;
+            padding: 15px 20px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .mobile-dropdown a:hover {
+            background-color: var(--primary);
+            color: var(--accent);
         }
 
         /* Home Page */
@@ -344,6 +400,21 @@
             resize: vertical;
         }
 
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* Footer */
         footer {
             background-color: var(--secondary);
@@ -445,7 +516,7 @@
     <!-- Header -->
     <header>
         <div class="container header-container">
-            <a href="#" class="logo">Luna Nails</a>
+            <a href="#home" class="logo">Luna Nails</a>
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
                 <li><a href="#about" class="nav-link" data-page="about">About</a></li>
@@ -455,6 +526,15 @@
             </ul>
             <div class="mobile-menu">
                 <i class="fas fa-bars"></i>
+                <div class="mobile-dropdown">
+                    <ul>
+                        <li><a href="#home" data-page="home">Home</a></li>
+                        <li><a href="#about" data-page="about">About</a></li>
+                        <li><a href="#services" data-page="services">Services</a></li>
+                        <li><a href="#portfolio" data-page="portfolio">Portfolio</a></li>
+                        <li><a href="#contact" data-page="contact">Contact</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
@@ -474,7 +554,7 @@
             <h2 class="section-title">About Me</h2>
             <div class="about-content">
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1595475884562-073c30d45670?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Technician">
+                    <img data-src="https://images.unsplash.com/photo-1595475884562-073c30d45670?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Technician" class="lazy">
                 </div>
                 <div class="about-text">
                     <h2>Creating Beauty with Precision</h2>
@@ -534,22 +614,22 @@
             <h2 class="section-title">Portfolio</h2>
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Minimalist French">
+                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Minimalist French" class="lazy">
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Geometric Design">
+                    <img data-src="https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Geometric Design" class="lazy">
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Negative Space">
+                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Negative Space" class="lazy">
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Neutral Tones">
+                    <img data-src="https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Neutral Tones" class="lazy">
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fine Line Art">
+                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fine Line Art" class="lazy">
                 </div>
                 <div class="portfolio-item">
-                    <img src="https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern French">
+                    <img data-src="https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern French" class="lazy">
                 </div>
             </div>
         </div>
@@ -655,21 +735,21 @@
                 <div class="footer-column">
                     <h3>Navigation</h3>
                     <ul>
-                        <li><a href="#home" class="footer-nav-link" data-page="home">Home</a></li>
-                        <li><a href="#about" class="footer-nav-link" data-page="about">About</a></li>
-                        <li><a href="#services" class="footer-nav-link" data-page="services">Services</a></li>
-                        <li><a href="#portfolio" class="footer-nav-link" data-page="portfolio">Portfolio</a></li>
-                        <li><a href="#contact" class="footer-nav-link" data-page="contact">Contact</a></li>
+                        <li><a href="#home" data-page="home">Home</a></li>
+                        <li><a href="#about" data-page="about">About</a></li>
+                        <li><a href="#services" data-page="services">Services</a></li>
+                        <li><a href="#portfolio" data-page="portfolio">Portfolio</a></li>
+                        <li><a href="#contact" data-page="contact">Contact</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
                     <h3>Services</h3>
                     <ul>
-                        <li><a href="#">Natural Manicure</a></li>
-                        <li><a href="#">Soft Gel Polish</a></li>
-                        <li><a href="#">Minimalist Art</a></li>
-                        <li><a href="#">Nail Care</a></li>
+                        <li><a href="#services" data-page="services">Natural Manicure</a></li>
+                        <li><a href="#services" data-page="services">Soft Gel Polish</a></li>
+                        <li><a href="#services" data-page="services">Minimalist Art</a></li>
+                        <li><a href="#services" data-page="services">Nail Care</a></li>
                     </ul>
                 </div>
                 
@@ -690,7 +770,7 @@
     <script>
         // Page Navigation
         document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link, .footer-nav-link');
+            const navLinks = document.querySelectorAll('.nav-link, .mobile-dropdown a, .footer-column a[data-page]');
             const pages = document.querySelectorAll('.page');
             
             // Show home page by default
@@ -710,13 +790,19 @@
                     showPage(pageId);
                     
                     // Close mobile menu if open
-                    document.querySelector('.nav-links').classList.remove('active');
+                    document.querySelector('.mobile-dropdown').classList.remove('active');
                 });
             });
             
             // Mobile menu toggle
-            document.querySelector('.mobile-menu').addEventListener('click', function() {
-                document.querySelector('.nav-links').classList.toggle('active');
+            document.querySelector('.mobile-menu').addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.querySelector('.mobile-dropdown').classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function() {
+                document.querySelector('.mobile-dropdown').classList.remove('active');
             });
             
             // View work button
@@ -747,7 +833,32 @@
                 
                 // Scroll to top
                 window.scrollTo(0, 0);
+                
+                // Lazy load images on the active page
+                lazyLoadImages();
             }
+            
+            // Lazy load images
+            function lazyLoadImages() {
+                const lazyImages = document.querySelectorAll('.lazy');
+                
+                lazyImages.forEach(img => {
+                    if (img.classList.contains('loaded')) return;
+                    
+                    const src = img.getAttribute('data-src');
+                    if (!src) return;
+                    
+                    const imageLoader = new Image();
+                    imageLoader.src = src;
+                    imageLoader.onload = () => {
+                        img.src = src;
+                        img.classList.add('loaded');
+                    };
+                });
+            }
+            
+            // Initial lazy load for home page
+            lazyLoadImages();
             
             // Header scroll effect
             window.addEventListener('scroll', function() {
