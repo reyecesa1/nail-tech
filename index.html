@@ -3,19 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nail Artistry | Visual Portfolio</title>
+    <title>Luna Nails | Minimalist Nail Artistry</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Base Styles */
         :root {
-            --primary: #f8e1e7;
-            --secondary: #e8b4bc;
-            --accent: #d89595;
-            --dark: #3a3238;
-            --light: #fff9fb;
-            --text: #333333;
-            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            --transition: all 0.4s ease;
+            --primary: #f8f5f2;
+            --secondary: #2c2c2c;
+            --accent: #d4a89c;
+            --light: #ffffff;
+            --gray: #e8e8e8;
+            --transition: all 0.3s ease;
         }
 
         * {
@@ -29,22 +27,22 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
-            color: var(--text);
+            color: var(--secondary);
             background-color: var(--light);
             overflow-x: hidden;
         }
 
         h1, h2, h3, h4 {
-            font-weight: 600;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
             line-height: 1.2;
             margin-bottom: 1rem;
-            color: var(--dark);
         }
 
         p {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         a {
@@ -52,18 +50,14 @@
             color: inherit;
         }
 
-        ul {
-            list-style: none;
-        }
-
         img {
             max-width: 100%;
-            display: block;
+            height: auto;
         }
 
         .container {
             width: 90%;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
         }
@@ -72,19 +66,30 @@
             display: inline-block;
             padding: 12px 30px;
             background-color: var(--secondary);
-            color: white;
-            border-radius: 30px;
-            font-weight: 500;
-            transition: var(--transition);
+            color: var(--light);
             border: none;
+            border-radius: 0;
+            font-weight: 400;
             cursor: pointer;
-            text-align: center;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
         }
 
         .btn:hover {
             background-color: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow);
+        }
+
+        /* Page Structure */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .page.active {
+            display: block;
         }
 
         .section {
@@ -97,15 +102,15 @@
             position: relative;
         }
 
-        .section-title::after {
+        .section-title:after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background-color: var(--secondary);
+            width: 60px;
+            height: 1px;
+            background-color: var(--accent);
         }
 
         /* Header & Navigation */
@@ -115,12 +120,12 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            background-color: rgba(255, 249, 251, 0.95);
-            box-shadow: var(--shadow);
+            background-color: var(--light);
+            border-bottom: 1px solid var(--gray);
             transition: var(--transition);
         }
 
-        .header-content {
+        .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -128,17 +133,15 @@
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        .logo span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
             color: var(--secondary);
         }
 
         .nav-links {
             display: flex;
+            list-style: none;
         }
 
         .nav-links li {
@@ -146,268 +149,193 @@
         }
 
         .nav-links a {
-            font-weight: 500;
+            font-weight: 400;
             transition: var(--transition);
             position: relative;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .nav-links a:hover {
-            color: var(--secondary);
-        }
-
-        .nav-links a::after {
+        .nav-links a:after {
             content: '';
             position: absolute;
             bottom: -5px;
             left: 0;
             width: 0;
-            height: 2px;
+            height: 1px;
             background-color: var(--secondary);
             transition: var(--transition);
         }
 
-        .nav-links a:hover::after {
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover:after {
             width: 100%;
         }
 
-        .hamburger {
-            display: none;
-            cursor: pointer;
-            font-size: 24px;
+        .nav-links a.active {
+            color: var(--accent);
         }
 
-        /* Hero Section */
-        .hero {
-            height: 100vh;
+        .nav-links a.active:after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Home Page */
+        #home {
             display: flex;
             align-items: center;
-            background: linear-gradient(rgba(255, 249, 251, 0.7), rgba(255, 249, 251, 0.7)), url('https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            justify-content: center;
             text-align: center;
-            padding-top: 80px;
+            background-color: var(--primary);
         }
 
         .hero-content {
             max-width: 800px;
-            margin: 0 auto;
         }
 
-        .hero h1 {
-            font-size: 4rem;
+        .hero-content h1 {
+            font-size: 3.5rem;
             margin-bottom: 20px;
-            color: var(--dark);
+            font-weight: 300;
         }
 
-        .hero p {
-            font-size: 1.2rem;
+        .hero-content p {
+            font-size: 1.1rem;
             margin-bottom: 30px;
-            color: var(--text);
+            color: #666;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        /* Gallery Section */
-        .gallery {
-            background-color: var(--primary);
+        /* About Page */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
         }
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
+        .about-image {
+            flex: 1;
         }
 
-        .gallery-item {
-            border-radius: 10px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: var(--shadow);
-            height: 400px;
-            cursor: pointer;
-        }
-
-        .gallery-img {
+        .about-image img {
             width: 100%;
-            height: 100%;
+            height: 500px;
             object-fit: cover;
-            transition: var(--transition);
         }
 
-        .gallery-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(212, 165, 165, 0.8);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: var(--transition);
-            padding: 20px;
-            text-align: center;
-            color: white;
+        .about-text {
+            flex: 1;
         }
 
-        .gallery-item:hover .gallery-overlay {
-            opacity: 1;
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
         }
 
-        .gallery-item:hover .gallery-img {
-            transform: scale(1.1);
-        }
-
-        /* Full Screen Gallery */
-        .fullscreen-gallery {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            opacity: 0;
-            pointer-events: none;
-            transition: var(--transition);
-        }
-
-        .fullscreen-gallery.active {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        .fullscreen-content {
-            position: relative;
-            max-width: 90%;
-            max-height: 90%;
-        }
-
-        .fullscreen-img {
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-            border-radius: 10px;
-        }
-
-        .close-gallery {
-            position: absolute;
-            top: -40px;
-            right: 0;
-            color: white;
-            font-size: 30px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .close-gallery:hover {
-            color: var(--secondary);
-        }
-
-        .gallery-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-size: 40px;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .gallery-nav:hover {
-            color: var(--secondary);
-        }
-
-        .prev {
-            left: -50px;
-        }
-
-        .next {
-            right: -50px;
-        }
-
-        /* Services Section */
+        /* Services Page */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
         .service-card {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
+            background-color: var(--primary);
+            padding: 40px 30px;
             text-align: center;
-            box-shadow: var(--shadow);
             transition: var(--transition);
+            border: 1px solid var(--gray);
         }
 
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
         }
 
         .service-icon {
-            font-size: 40px;
-            color: var(--secondary);
+            font-size: 2rem;
+            color: var(--accent);
             margin-bottom: 20px;
         }
 
         .service-card h3 {
+            font-size: 1.5rem;
             margin-bottom: 15px;
         }
 
-        /* Contact Section */
-        .contact-content {
+        /* Portfolio Page */
+        .portfolio-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Contact Page */
+        .contact-container {
+            display: flex;
             gap: 50px;
         }
 
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        .contact-info, .contact-form {
+            flex: 1;
         }
 
         .contact-item {
             display: flex;
             align-items: flex-start;
-            gap: 15px;
+            margin-bottom: 30px;
         }
 
         .contact-icon {
-            font-size: 20px;
-            color: var(--secondary);
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-right: 15px;
             margin-top: 5px;
         }
 
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
         .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            margin-bottom: 5px;
-            font-weight: 500;
+            margin-bottom: 20px;
         }
 
         .form-control {
+            width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            border: 1px solid var(--gray);
+            border-radius: 0;
             font-family: inherit;
             transition: var(--transition);
+            background-color: var(--primary);
         }
 
         .form-control:focus {
-            border-color: var(--secondary);
+            border-color: var(--accent);
             outline: none;
         }
 
@@ -418,35 +346,36 @@
 
         /* Footer */
         footer {
-            background-color: var(--dark);
-            color: white;
-            padding: 50px 0 20px;
+            background-color: var(--secondary);
+            color: var(--light);
+            padding: 60px 0 30px;
         }
 
         .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
             margin-bottom: 40px;
         }
 
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+        }
+
         .footer-logo {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .footer-logo span {
-            color: var(--secondary);
-        }
-
-        .footer-about p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
             margin-bottom: 20px;
+            color: var(--light);
         }
 
         .social-links {
             display: flex;
             gap: 15px;
+            margin-top: 20px;
         }
 
         .social-link {
@@ -455,378 +384,256 @@
             justify-content: center;
             width: 40px;
             height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 0;
             transition: var(--transition);
         }
 
         .social-link:hover {
-            background-color: var(--secondary);
-            transform: translateY(-3px);
-        }
-
-        .footer-heading {
-            font-size: 18px;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-heading::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--secondary);
-        }
-
-        .footer-links li {
-            margin-bottom: 10px;
-        }
-
-        .footer-links a {
-            transition: var(--transition);
-        }
-
-        .footer-links a:hover {
-            color: var(--secondary);
-            padding-left: 5px;
+            background-color: var(--accent);
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
         }
 
         /* Responsive Styles */
         @media (max-width: 992px) {
-            .hero h1 {
-                font-size: 3rem;
+            .about-content, .contact-container {
+                flex-direction: column;
             }
             
-            .contact-content {
-                grid-template-columns: 1fr;
+            .hero-content h1 {
+                font-size: 2.8rem;
             }
         }
 
         @media (max-width: 768px) {
-            .hamburger {
-                display: block;
-                position: relative;
-                z-index: 1001;
-            }
-            
-            /* Updated Mobile Navigation - Small Dropdown */
             .nav-links {
-                position: absolute;
-                top: 100%;
-                right: 20px;
-                width: 200px;
-                background-color: white;
-                flex-direction: column;
-                align-items: flex-start;
-                padding: 15px 20px;
-                border-radius: 10px;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-                opacity: 0;
-                transform: translateY(-10px);
-                pointer-events: none;
-                transition: var(--transition);
-                z-index: 1000;
+                display: none;
             }
             
-            .nav-links.active {
-                opacity: 1;
-                transform: translateY(0);
-                pointer-events: all;
-            }
-            
-            .nav-links li {
-                margin: 10px 0;
-                width: 100%;
-            }
-            
-            .nav-links a {
+            .mobile-menu {
                 display: block;
-                width: 100%;
-                padding: 8px 0;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             }
             
-            .nav-links a:last-child {
-                border-bottom: none;
-            }
-            
-            .hero h1 {
-                font-size: 2.5rem;
+            .hero-content h1 {
+                font-size: 2.2rem;
             }
             
             .section {
                 padding: 60px 0;
             }
-            
-            .gallery-nav {
-                font-size: 30px;
-            }
-            
-            .prev {
-                left: 10px;
-            }
-            
-            .next {
-                right: 10px;
-            }
         }
 
         @media (max-width: 576px) {
-            .hero h1 {
-                font-size: 2rem;
+            .hero-content h1 {
+                font-size: 1.8rem;
             }
             
-            .hero p {
-                font-size: 1rem;
-            }
-            
-            .gallery-grid {
+            .portfolio-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .nav-links {
-                right: 10px;
-                width: 180px;
-            }
-        }
-
-        /* Close dropdown when clicking outside */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: transparent;
-            z-index: 999;
-            display: none;
-        }
-        
-        .overlay.active {
-            display: block;
         }
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo">Nail<span>Artistry</span></a>
-                <div class="hamburger">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+        <div class="container header-container">
+            <a href="#" class="logo">Luna Nails</a>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#about" class="nav-link" data-page="about">About</a></li>
+                <li><a href="#services" class="nav-link" data-page="services">Services</a></li>
+                <li><a href="#portfolio" class="nav-link" data-page="portfolio">Portfolio</a></li>
+                <li><a href="#contact" class="nav-link" data-page="contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
             </div>
         </div>
     </header>
 
-    <!-- Overlay for closing dropdown -->
-    <div class="overlay"></div>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Nail Artistry</h1>
-                <p>Visual Portfolio of Creative Nail Designs</p>
-                <a href="#gallery" class="btn">View Gallery</a>
-            </div>
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <div class="container hero-content">
+            <h1>Minimalist Nail Artistry</h1>
+            <p>Elevating natural beauty through precision, care, and minimalist design. Each nail tells a story of elegance and sophistication.</p>
+            <a href="#portfolio" class="btn view-work-btn">View Our Work</a>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section class="section gallery" id="gallery">
-        <div class="container">
-            <h2 class="section-title">Gallery</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1607778833979-84f253bcdb6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="French Gel Manicure" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h3>French Gel Manicure</h3>
-                        <p>Elegant french tips with a modern twist</p>
-                    </div>
+    <!-- About Page -->
+    <section id="about" class="page">
+        <div class="container section">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1595475884562-073c30d45670?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Technician">
                 </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1597848212624-e6d4bd66d428?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Coffin Acrylics" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h3>Coffin Acrylics</h3>
-                        <p>Matte black coffin shape with gold foil accents</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1612817159946-2053d56d1d0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Floral Nail Art" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h3>Floral Nail Art</h3>
-                        <p>Delicate hand-painted flowers on a nude base</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Ombré Gel" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h3>Ombré Gel</h3>
-                        <p>Soft pink to white ombré effect</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1577091320057-2ce8e4d041e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Geometric Design" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h3>Geometric Design</h3>
-                        <p>Modern geometric patterns in contrasting colors</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1596704012031-4d64730f6796?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Stiletto Acrylics" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h3>Stiletto Acrylics</h3>
-                        <p>Bold stiletto shape with chrome finish</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Marble Nails" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h3>Marble Nails</h3>
-                        <p>Elegant marble effect with gold veins</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1607778833979-84f253bcdb6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Glitter Accents" class="gallery-img">
-                    <div class="gallery-overlay">
-                        <h3>Glitter Accents</h3>
-                        <p>Subtle glitter accents on classic manicure</p>
-                    </div>
+                <div class="about-text">
+                    <h2>Creating Beauty with Precision</h2>
+                    <p>With over five years of dedicated experience in nail artistry, I've developed a unique approach that combines technical skill with an artistic eye. My philosophy centers on enhancing natural beauty rather than masking it.</p>
+                    <p>I specialize in minimalist nail designs that emphasize clean lines, subtle textures, and sophisticated color palettes. Each service is a personalized experience, tailored to your preferences and lifestyle.</p>
+                    <p>My studio is designed as a tranquil space where you can unwind while receiving exceptional nail care. I use only the highest quality, ethically-sourced products that are gentle on your nails and the environment.</p>
+                    <a href="#contact" class="btn">Book a Consultation</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Full Screen Gallery -->
-    <div class="fullscreen-gallery">
-        <div class="fullscreen-content">
-            <img src="" alt="" class="fullscreen-img">
-            <div class="close-gallery">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="gallery-nav prev">
-                <i class="fas fa-chevron-left"></i>
-            </div>
-            <div class="gallery-nav next">
-                <i class="fas fa-chevron-right"></i>
-            </div>
-        </div>
-    </div>
-
-    <!-- Services Section -->
-    <section class="section" id="services">
-        <div class="container">
+    <!-- Services Page -->
+    <section id="services" class="page">
+        <div class="container section">
             <h2 class="section-title">Services</h2>
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-paint-brush"></i>
+                        <i class="fas fa-leaf"></i>
                     </div>
-                    <h3>Nail Art Design</h3>
-                    <p>Custom nail art designs from simple patterns to intricate masterpieces.</p>
+                    <h3>Natural Manicure</h3>
+                    <p>A gentle approach focusing on nail health and natural beauty with minimal product use.</p>
+                    <p class="price">$45</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-gem"></i>
                     </div>
-                    <h3>Gel Manicure</h3>
-                    <p>Long-lasting gel manicures with a flawless finish.</p>
+                    <h3>Soft Gel Polish</h3>
+                    <p>Long-lasting, chip-resistant polish with a delicate finish that enhances without overpowering.</p>
+                    <p class="price">$60</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-hand-sparkles"></i>
+                        <i class="fas fa-pen-fancy"></i>
                     </div>
-                    <h3>Acrylic Extensions</h3>
-                    <p>Professional acrylic nail extensions for length and strength.</p>
+                    <h3>Minimalist Art</h3>
+                    <p>Subtle designs using fine lines, negative space, and delicate accents for understated elegance.</p>
+                    <p class="price">$75+</p>
                 </div>
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-spa"></i>
                     </div>
                     <h3>Nail Care</h3>
-                    <p>Comprehensive nail treatments for healthy, beautiful nails.</p>
+                    <p>Restorative treatments to strengthen and nourish nails, promoting long-term health.</p>
+                    <p class="price">$55</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="section" id="contact">
-        <div class="container">
+    <!-- Portfolio Page -->
+    <section id="portfolio" class="page">
+        <div class="container section">
+            <h2 class="section-title">Portfolio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Minimalist French">
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Geometric Design">
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Negative Space">
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Neutral Tones">
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fine Line Art">
+                </div>
+                <div class="portfolio-item">
+                    <img src="https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern French">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page">
+        <div class="container section">
             <h2 class="section-title">Contact</h2>
-            <div class="contact-content">
+            <div class="contact-container">
                 <div class="contact-info">
+                    <h3>Visit the Studio</h3>
+                    <p>Schedule an appointment for a personalized consultation and experience minimalist nail artistry in a tranquil setting.</p>
+                    
                     <div class="contact-item">
                         <div class="contact-icon">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div>
-                            <h3>Location</h3>
-                            <p>123 Beauty Street, Nail City, NC 12345</p>
+                            <h4>Location</h4>
+                            <p>123 Minimalist Lane<br>Design District</p>
                         </div>
                     </div>
+                    
                     <div class="contact-item">
                         <div class="contact-icon">
                             <i class="fas fa-phone"></i>
                         </div>
                         <div>
-                            <h3>Phone</h3>
-                            <p>(123) 456-7890</p>
+                            <h4>Phone</h4>
+                            <p>(555) 123-4567</p>
                         </div>
                     </div>
+                    
                     <div class="contact-item">
                         <div class="contact-icon">
                             <i class="fas fa-envelope"></i>
                         </div>
                         <div>
-                            <h3>Email</h3>
-                            <p>hello@nailartistry.com</p>
+                            <h4>Email</h4>
+                            <p>appointments@lunanails.com</p>
                         </div>
                     </div>
+                    
                     <div class="contact-item">
                         <div class="contact-icon">
                             <i class="fas fa-clock"></i>
                         </div>
                         <div>
-                            <h3>Working Hours</h3>
-                            <p>Monday - Friday: 9am - 7pm</p>
-                            <p>Saturday: 10am - 5pm</p>
+                            <h4>Hours</h4>
+                            <p>Tuesday - Friday: 10am - 6pm</p>
+                            <p>Saturday: 10am - 4pm</p>
+                            <p>Sunday & Monday: Closed</p>
                         </div>
                     </div>
                 </div>
-                <form class="contact-form">
-                    <div class="form-group">
-                        <label for="name">Your Name</label>
-                        <input type="text" id="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Your Email</label>
-                        <input type="email" id="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" class="form-control" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Send Message</button>
-                </form>
+                
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Your Phone">
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control" required>
+                                <option value="" disabled selected>Service Interest</option>
+                                <option value="natural">Natural Manicure</option>
+                                <option value="gel">Soft Gel Polish</option>
+                                <option value="art">Minimalist Art</option>
+                                <option value="care">Nail Care</option>
+                                <option value="consultation">Consultation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
             </div>
         </div>
     </section>
@@ -835,140 +642,122 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-about">
-                    <div class="footer-logo">Nail<span>Artistry</span></div>
-                    <p>Visual portfolio of creative nail designs and artistry.</p>
+                <div class="footer-column">
+                    <div class="footer-logo">Luna Nails</div>
+                    <p>Minimalist nail artistry focused on precision, quality, and enhancing natural beauty.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-pinterest-p"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
-                <div class="footer-links">
-                    <h3 class="footer-heading">Quick Links</h3>
+                
+                <div class="footer-column">
+                    <h3>Navigation</h3>
                     <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#gallery">Gallery</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#home" class="footer-nav-link" data-page="home">Home</a></li>
+                        <li><a href="#about" class="footer-nav-link" data-page="about">About</a></li>
+                        <li><a href="#services" class="footer-nav-link" data-page="services">Services</a></li>
+                        <li><a href="#portfolio" class="footer-nav-link" data-page="portfolio">Portfolio</a></li>
+                        <li><a href="#contact" class="footer-nav-link" data-page="contact">Contact</a></li>
                     </ul>
                 </div>
-                <div class="footer-links">
-                    <h3 class="footer-heading">Services</h3>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
                     <ul>
-                        <li><a href="#">Nail Art Design</a></li>
-                        <li><a href="#">Gel Manicure</a></li>
-                        <li><a href="#">Acrylic Extensions</a></li>
+                        <li><a href="#">Natural Manicure</a></li>
+                        <li><a href="#">Soft Gel Polish</a></li>
+                        <li><a href="#">Minimalist Art</a></li>
                         <li><a href="#">Nail Care</a></li>
                     </ul>
                 </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Minimalist Lane</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> appointments@lunanails.com</p>
+                </div>
             </div>
+            
             <div class="footer-bottom">
-                <p>&copy; 2023 Nail Artistry. All Rights Reserved.</p>
+                <p>&copy; 2023 Luna Nails. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile Navigation Toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navLinks = document.querySelector('.nav-links');
-        const overlay = document.querySelector('.overlay');
-
-        hamburger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            navLinks.classList.toggle('active');
-            overlay.classList.toggle('active');
-        });
-
-        // Close mobile menu when clicking on a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                overlay.classList.remove('active');
+        // Page Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link, .footer-nav-link');
+            const pages = document.querySelectorAll('.page');
+            
+            // Show home page by default
+            showPage('home');
+            
+            // Add click event to navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const pageId = this.getAttribute('data-page');
+                    
+                    // Update active nav link
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show selected page
+                    showPage(pageId);
+                    
+                    // Close mobile menu if open
+                    document.querySelector('.nav-links').classList.remove('active');
+                });
             });
-        });
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navLinks.contains(e.target) && !hamburger.contains(e.target)) {
-                navLinks.classList.remove('active');
-                overlay.classList.remove('active');
-            }
-        });
-
-        // Full Screen Gallery
-        const galleryItems = document.querySelectorAll('.gallery-item');
-        const fullscreenGallery = document.querySelector('.fullscreen-gallery');
-        const fullscreenImg = document.querySelector('.fullscreen-img');
-        const closeGallery = document.querySelector('.close-gallery');
-        const prevBtn = document.querySelector('.prev');
-        const nextBtn = document.querySelector('.next');
-        let currentImageIndex = 0;
-
-        // Open fullscreen gallery
-        galleryItems.forEach((item, index) => {
-            item.addEventListener('click', () => {
-                currentImageIndex = index;
-                updateFullscreenImage();
-                fullscreenGallery.classList.add('active');
-                document.body.style.overflow = 'hidden';
+            
+            // Mobile menu toggle
+            document.querySelector('.mobile-menu').addEventListener('click', function() {
+                document.querySelector('.nav-links').classList.toggle('active');
             });
-        });
-
-        // Close fullscreen gallery
-        closeGallery.addEventListener('click', () => {
-            fullscreenGallery.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
-
-        // Navigate gallery
-        prevBtn.addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex - 1 + galleryItems.length) % galleryItems.length;
-            updateFullscreenImage();
-        });
-
-        nextBtn.addEventListener('click', () => {
-            currentImageIndex = (currentImageIndex + 1) % galleryItems.length;
-            updateFullscreenImage();
-        });
-
-        // Update fullscreen image
-        function updateFullscreenImage() {
-            const imgSrc = galleryItems[currentImageIndex].querySelector('.gallery-img').src;
-            const imgAlt = galleryItems[currentImageIndex].querySelector('.gallery-img').alt;
-            fullscreenImg.src = imgSrc;
-            fullscreenImg.alt = imgAlt;
-        }
-
-        // Close gallery with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && fullscreenGallery.classList.contains('active')) {
-                fullscreenGallery.classList.remove('active');
-                document.body.style.overflow = 'auto';
+            
+            // View work button
+            document.querySelector('.view-work-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                showPage('portfolio');
+                
+                // Update active nav link
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                document.querySelector('[data-page="portfolio"]').classList.add('active');
+            });
+            
+            // Form submission
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Thank you for your message. We will contact you soon to confirm your appointment.');
+                this.reset();
+            });
+            
+            function showPage(pageId) {
+                // Hide all pages
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show selected page
+                document.getElementById(pageId).classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
             }
-        });
-
-        // Form Submission
-        const contactForm = document.querySelector('.contact-form');
-        
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! I will get back to you soon.');
-            contactForm.reset();
-        });
-
-        // Header Scroll Effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.padding = '10px 0';
-                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
-            } else {
-                header.style.padding = '20px 0';
-                header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
-            }
+            
+            // Header scroll effect
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                } else {
+                    header.style.boxShadow = 'none';
+                }
+            });
         });
     </script>
 </body>
