@@ -331,6 +331,7 @@
             text-align: center;
             transition: var(--transition);
             border: 1px solid var(--gray);
+            cursor: pointer;
         }
 
         .service-card:hover {
@@ -476,6 +477,7 @@
             background-color: rgba(255,255,255,0.1);
             border-radius: 0;
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .social-link:hover {
@@ -488,6 +490,11 @@
             border-top: 1px solid rgba(255,255,255,0.1);
             font-size: 0.9rem;
             color: rgba(255,255,255,0.7);
+        }
+
+        /* Cursor styles for interactive elements */
+        .nav-link, .mobile-dropdown a, .footer-column a, .service-card {
+            cursor: pointer;
         }
 
         /* Responsive Styles */
@@ -727,9 +734,9 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" placeholder="Your Message" required></textarea>
+                            <textarea class="form-control" id="message-textarea" placeholder="Your Message" required></textarea>
                         </div>
-                        <button type="submit" class="btn">Send Message</button>
+                        <button type="submit" class="btn" id="send-message-btn">Send Message</button>
                     </form>
                 </div>
             </div>
@@ -830,6 +837,8 @@
             const heroButton = document.getElementById('hero-button');
             const homeLink = document.getElementById('home-link');
             const aboutContactBtn = document.getElementById('about-contact-btn');
+            const sendMessageBtn = document.getElementById('send-message-btn');
+            const messageTextarea = document.getElementById('message-textarea');
             
             // Show home page by default
             showPage('home');
@@ -862,6 +871,16 @@
                 const currentPage = document.querySelector('.nav-link.active').getAttribute('data-page');
                 const targetPage = heroContent[currentPage].buttonPage;
                 navigateToPage(targetPage);
+            });
+            
+            // Send Message button - scroll to textarea
+            sendMessageBtn.addEventListener('click', function(e) {
+                // Only scroll if we're already on the contact page
+                if (document.querySelector('.nav-link.active').getAttribute('data-page') === 'contact') {
+                    e.preventDefault();
+                    messageTextarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    messageTextarea.focus();
+                }
             });
             
             // Mobile menu toggle
