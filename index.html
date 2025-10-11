@@ -115,6 +115,7 @@
             margin-bottom: 50px;
             position: relative;
             font-weight: 700; /* Even bolder section titles */
+            font-size: 3.5rem; /* Larger section titles */
         }
 
         .section-title:after {
@@ -135,8 +136,9 @@
             left: 0;
             width: 100%;
             z-index: 1000;
-            background-color: var(--light);
-            border-bottom: 1px solid var(--gray);
+            background-color: var(--secondary); /* Match footer color */
+            color: var(--light); /* Light text for contrast */
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             transition: var(--transition);
         }
 
@@ -149,9 +151,9 @@
 
         .logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-size: 2.2rem; /* Larger logo */
             font-weight: 700; /* Bolder logo */
-            color: var(--secondary);
+            color: var(--light); /* Light text for contrast */
             cursor: pointer;
         }
 
@@ -168,10 +170,11 @@
             font-weight: 600; /* Bolder navigation links */
             transition: var(--transition);
             position: relative;
-            font-size: 0.9rem;
+            font-size: 1rem; /* Slightly larger nav text */
             text-transform: uppercase;
             letter-spacing: 1px;
             cursor: pointer;
+            color: var(--light); /* Light text for contrast */
         }
 
         .nav-links a:after {
@@ -181,7 +184,7 @@
             left: 0;
             width: 0;
             height: 2px; /* Thicker underline */
-            background-color: var(--secondary);
+            background-color: var(--accent); /* Accent color for hover */
             transition: var(--transition);
         }
 
@@ -206,6 +209,7 @@
             font-size: 1.5rem;
             cursor: pointer;
             position: relative;
+            color: var(--light); /* Light text for contrast */
         }
 
         /* Mobile Dropdown Menu */
@@ -215,8 +219,8 @@
             top: 100%;
             right: 0;
             width: 200px;
-            background-color: var(--light);
-            border: 1px solid var(--gray);
+            background-color: var(--secondary); /* Match header/footer */
+            border: 1px solid rgba(255,255,255,0.1);
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             z-index: 1001;
         }
@@ -230,7 +234,7 @@
         }
 
         .mobile-dropdown li {
-            border-bottom: 1px solid var(--gray);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
 
         .mobile-dropdown li:last-child {
@@ -240,16 +244,17 @@
         .mobile-dropdown a {
             display: block;
             padding: 15px 20px;
-            font-size: 0.9rem;
+            font-size: 1rem; /* Slightly larger mobile menu text */
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: var(--transition);
             cursor: pointer;
             font-weight: 600; /* Bolder mobile menu text */
+            color: var(--light); /* Light text for contrast */
         }
 
         .mobile-dropdown a:hover {
-            background-color: var(--primary);
+            background-color: rgba(255,255,255,0.1);
             color: var(--accent);
         }
 
@@ -259,7 +264,10 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background-color: var(--primary);
+            background: linear-gradient(rgba(249, 247, 242, 0.85), rgba(249, 247, 242, 0.9)), 
+                        url('https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
             min-height: calc(100vh - 80px);
             margin-top: 80px;
             transition: all 0.5s ease;
@@ -282,13 +290,13 @@
         }
 
         .hero-content h1 {
-            font-size: 3.5rem;
+            font-size: 4rem; /* Larger hero title */
             margin-bottom: 20px;
             font-weight: 600; /* Bolder hero title */
         }
 
         .hero-content p {
-            font-size: 1.1rem;
+            font-size: 1.3rem; /* Larger hero description */
             margin-bottom: 30px;
             color: #666;
             max-width: 600px;
@@ -319,9 +327,13 @@
         }
 
         .about-text h2 {
-            font-size: 2.5rem;
+            font-size: 3rem; /* Larger about heading */
             margin-bottom: 20px;
             font-weight: 700; /* Bolder about heading */
+        }
+
+        .about-text p {
+            font-size: 1.1rem; /* Larger about text */
         }
 
         /* Services Page - Auto Carousel for Desktop, Grid for Mobile */
@@ -347,15 +359,19 @@
         }
 
         .service-icon {
-            font-size: 2rem;
+            font-size: 2.5rem; /* Larger service icons */
             color: var(--accent);
             margin-bottom: 20px;
         }
 
         .service-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.8rem; /* Larger service titles */
             margin-bottom: 15px;
             font-weight: 700; /* Bolder service titles */
+        }
+
+        .service-card p {
+            font-size: 1.1rem; /* Larger service text */
         }
 
         /* Services Auto Carousel for Desktop */
@@ -414,6 +430,15 @@
             flex: 1;
         }
 
+        .contact-info h3 {
+            font-size: 2.2rem; /* Larger contact heading */
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem; /* Larger contact text */
+        }
+
         .contact-item {
             display: flex;
             align-items: flex-start;
@@ -421,10 +446,18 @@
         }
 
         .contact-icon {
-            font-size: 1.2rem;
+            font-size: 1.4rem; /* Larger contact icons */
             color: var(--accent);
             margin-right: 15px;
             margin-top: 5px;
+        }
+
+        .contact-item h4 {
+            font-size: 1.3rem; /* Larger contact subheadings */
+        }
+
+        .contact-item p {
+            font-size: 1.1rem; /* Larger contact details */
         }
 
         .form-group {
@@ -433,13 +466,14 @@
 
         .form-control {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px 15px; /* Slightly larger form fields */
             border: 1px solid var(--gray);
             border-radius: 0;
             font-family: inherit;
             transition: var(--transition);
             background-color: var(--primary);
             font-weight: 500; /* Bolder form text */
+            font-size: 1rem; /* Larger form text */
         }
 
         .form-control:focus {
@@ -489,10 +523,19 @@
 
         .footer-logo {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 1.8rem;
+            font-size: 2rem; /* Larger footer logo */
             font-weight: 700; /* Bolder footer logo */
             margin-bottom: 20px;
             color: var(--light);
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem; /* Larger footer headings */
+            margin-bottom: 20px;
+        }
+
+        .footer-column p, .footer-column ul li a {
+            font-size: 1.1rem; /* Larger footer text */
         }
 
         .social-links {
@@ -521,7 +564,7 @@
             text-align: center;
             padding-top: 30px;
             border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.9rem;
+            font-size: 1rem; /* Larger footer bottom text */
             color: rgba(255,255,255,0.7);
             font-weight: 500; /* Bolder footer text */
         }
@@ -538,7 +581,11 @@
             }
             
             .hero-content h1 {
-                font-size: 2.8rem;
+                font-size: 3.2rem;
+            }
+            
+            .section-title {
+                font-size: 3rem;
             }
         }
 
@@ -552,11 +599,15 @@
             }
             
             .hero-content h1 {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             .section {
                 padding: 60px 0;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
             }
             
             /* Hide carousels on mobile, show grid */
@@ -586,11 +637,19 @@
 
         @media (max-width: 576px) {
             .hero-content h1 {
-                font-size: 1.8rem;
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
             }
             
             .portfolio-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -604,7 +663,7 @@
                 <li><a class="nav-link active" data-page="home">Home</a></li>
                 <li><a class="nav-link" data-page="about">About</a></li>
                 <li><a class="nav-link" data-page="services">Services</a></li>
-                <li><a class="nav-link" data-page="portfolio">Portfolio</a></li>
+                <li><a class="nav-link" data-page="portfolio">My Work</a></li>
                 <li><a class="nav-link" data-page="contact">Contact</a></li>
             </ul>
             <div class="mobile-menu">
@@ -614,7 +673,7 @@
                         <li><a data-page="home">Home</a></li>
                         <li><a data-page="about">About</a></li>
                         <li><a data-page="services">Services</a></li>
-                        <li><a data-page="portfolio">Portfolio</a></li>
+                        <li><a data-page="portfolio">My Work</a></li>
                         <li><a data-page="contact">Contact</a></li>
                     </ul>
                 </div>
@@ -703,27 +762,27 @@
     <!-- Portfolio Page -->
     <section id="portfolio" class="page">
         <div class="container section">
-            <h2 class="section-title">Portfolio</h2>
+            <h2 class="section-title">My Work</h2>
             
             <!-- Portfolio Grid for Mobile -->
             <div class="portfolio-grid">
                 <div class="portfolio-item">
-                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Minimalist French" class="lazy">
+                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Minimalist Nail Design" class="lazy">
                 </div>
                 <div class="portfolio-item">
-                    <img data-src="https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Geometric Design" class="lazy">
+                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Minimalist Nail Design" class="lazy">
                 </div>
                 <div class="portfolio-item">
-                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Negative Space" class="lazy">
+                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Minimalist Nail Design" class="lazy">
                 </div>
                 <div class="portfolio-item">
-                    <img data-src="https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Neutral Tones" class="lazy">
+                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Minimalist Nail Design" class="lazy">
                 </div>
                 <div class="portfolio-item">
-                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Fine Line Art" class="lazy">
+                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Minimalist Nail Design" class="lazy">
                 </div>
                 <div class="portfolio-item">
-                    <img data-src="https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Modern French" class="lazy">
+                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Minimalist Nail Design" class="lazy">
                 </div>
             </div>
             
@@ -828,7 +887,7 @@
                     <p>Minimalist nail artistry focused on precision, quality, and enhancing natural beauty.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
                     </div>
                 </div>
@@ -839,7 +898,7 @@
                         <li><a data-page="home">Home</a></li>
                         <li><a data-page="about">About</a></li>
                         <li><a data-page="services">Services</a></li>
-                        <li><a data-page="portfolio">Portfolio</a></li>
+                        <li><a data-page="portfolio">My Work</a></li>
                         <li><a data-page="contact">Contact</a></li>
                     </ul>
                 </div>
@@ -890,7 +949,7 @@
                 buttonPage: "portfolio"
             },
             portfolio: {
-                title: "Our Portfolio",
+                title: "My Work",
                 description: "Browse our collection of minimalist nail designs. Each piece showcases precision, elegance, and understated beauty.",
                 buttonText: "Book an Appointment",
                 buttonPage: "contact"
