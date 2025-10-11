@@ -761,6 +761,11 @@
             .portfolio-carousel-container {
                 display: block;
             }
+            
+            .services-grid,
+            .portfolio-grid {
+                display: none;
+            }
         }
 
         @media (max-width: 576px) {
@@ -850,49 +855,6 @@
         <div class="container section">
             <h2 class="section-title">Services</h2>
             
-            <!-- Services Grid for Desktop -->
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-hand-sparkles"></i>
-                    </div>
-                    <h3>Classic Manicure</h3>
-                    <p>A traditional manicure focusing on nail health and beauty with shaping, cuticle care, and polish.</p>
-                    <p class="price">$35</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-gem"></i>
-                    </div>
-                    <h3>Gel Manicure</h3>
-                    <p>Long-lasting, chip-resistant gel polish with a glossy finish that lasts for weeks.</p>
-                    <p class="price">$50</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3>Nail Art</h3>
-                    <p>Custom nail designs from simple accents to detailed artwork for a personalized look.</p>
-                    <p class="price">$15+</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-spa"></i>
-                    </div>
-                    <h3>Nail Care</h3>
-                    <p>Restorative treatments to strengthen and nourish nails, promoting long-term health.</p>
-                    <p class="price">$45</p>
-                </div>
-            </div>
-            
-            <!-- Services Carousel for Desktop -->
-            <div class="services-carousel-container">
-                <div class="services-carousel-track" id="services-carousel">
-                    <!-- Service cards will be duplicated here by JavaScript -->
-                </div>
-            </div>
-            
             <!-- Services Card Stack for Mobile -->
             <div class="mobile-card-stack-container" id="services-stack">
                 <div class="mobile-card-stack" id="services-stack-inner">
@@ -936,6 +898,13 @@
                     <div class="stack-indicator" data-index="3"></div>
                 </div>
             </div>
+            
+            <!-- Services Carousel for Desktop -->
+            <div class="services-carousel-container">
+                <div class="services-carousel-track" id="services-carousel">
+                    <!-- Service cards will be duplicated here by JavaScript -->
+                </div>
+            </div>
         </div>
     </section>
 
@@ -943,35 +912,6 @@
     <section id="portfolio" class="page">
         <div class="container section">
             <h2 class="section-title">My Work</h2>
-            
-            <!-- Portfolio Grid for Desktop -->
-            <div class="portfolio-grid">
-                <div class="portfolio-item">
-                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Design" class="lazy">
-                </div>
-                <div class="portfolio-item">
-                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Design" class="lazy">
-                </div>
-                <div class="portfolio-item">
-                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Design" class="lazy">
-                </div>
-                <div class="portfolio-item">
-                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Design" class="lazy">
-                </div>
-                <div class="portfolio-item">
-                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Design" class="lazy">
-                </div>
-                <div class="portfolio-item">
-                    <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Design" class="lazy">
-                </div>
-            </div>
-            
-            <!-- Portfolio Carousel for Desktop -->
-            <div class="portfolio-carousel-container">
-                <div class="portfolio-carousel-track" id="portfolio-carousel">
-                    <!-- Portfolio items will be duplicated here by JavaScript -->
-                </div>
-            </div>
             
             <!-- Portfolio Card Stack for Mobile -->
             <div class="mobile-card-stack-container" id="portfolio-stack">
@@ -1002,6 +942,13 @@
                     <div class="stack-indicator" data-index="1"></div>
                     <div class="stack-indicator" data-index="2"></div>
                     <div class="stack-indicator" data-index="3"></div>
+                </div>
+            </div>
+            
+            <!-- Portfolio Carousel for Desktop -->
+            <div class="portfolio-carousel-container">
+                <div class="portfolio-carousel-track" id="portfolio-carousel">
+                    <!-- Portfolio items will be duplicated here by JavaScript -->
                 </div>
             </div>
         </div>
@@ -1326,26 +1273,72 @@
             
             // Services Carousel
             const servicesCarousel = document.getElementById('services-carousel');
-            const servicesGrid = document.querySelector('.services-grid');
             
-            if (servicesCarousel && servicesGrid) {
-                // Clone service cards for infinite loop
-                const serviceCards = servicesGrid.querySelectorAll('.service-card');
+            // Create service cards for carousel
+            const serviceCards = [
+                {
+                    icon: 'fas fa-hand-sparkles',
+                    title: 'Classic Manicure',
+                    description: 'A traditional manicure focusing on nail health and beauty with shaping, cuticle care, and polish.',
+                    price: '$35'
+                },
+                {
+                    icon: 'fas fa-gem',
+                    title: 'Gel Manicure',
+                    description: 'Long-lasting, chip-resistant gel polish with a glossy finish that lasts for weeks.',
+                    price: '$50'
+                },
+                {
+                    icon: 'fas fa-paint-brush',
+                    title: 'Nail Art',
+                    description: 'Custom nail designs from simple accents to detailed artwork for a personalized look.',
+                    price: '$15+'
+                },
+                {
+                    icon: 'fas fa-spa',
+                    title: 'Nail Care',
+                    description: 'Restorative treatments to strengthen and nourish nails, promoting long-term health.',
+                    price: '$45'
+                }
+            ];
+            
+            if (servicesCarousel) {
+                // Clear any existing content
+                servicesCarousel.innerHTML = '';
+                
+                // Create service cards for carousel
                 serviceCards.forEach(card => {
-                    const clone = card.cloneNode(true);
-                    servicesCarousel.appendChild(clone);
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'service-card';
+                    cardElement.innerHTML = `
+                        <div class="service-icon">
+                            <i class="${card.icon}"></i>
+                        </div>
+                        <h3>${card.title}</h3>
+                        <p>${card.description}</p>
+                        <p class="price">${card.price}</p>
+                    `;
+                    servicesCarousel.appendChild(cardElement);
                 });
                 
                 // Duplicate the cards for seamless looping
                 serviceCards.forEach(card => {
-                    const clone = card.cloneNode(true);
-                    servicesCarousel.appendChild(clone);
+                    const cardElement = document.createElement('div');
+                    cardElement.className = 'service-card';
+                    cardElement.innerHTML = `
+                        <div class="service-icon">
+                            <i class="${card.icon}"></i>
+                        </div>
+                        <h3>${card.title}</h3>
+                        <p>${card.description}</p>
+                        <p class="price">${card.price}</p>
+                    `;
+                    servicesCarousel.appendChild(cardElement);
                 });
                 
                 // Set up animation
                 let servicesPosition = 0;
                 const servicesSpeed = 0.5; // pixels per frame (slower for readability)
-                const servicesInterval = 16; // ~60fps
                 
                 function animateServices() {
                     servicesPosition -= servicesSpeed;
@@ -1367,33 +1360,51 @@
             
             // Portfolio Carousel
             const portfolioCarousel = document.getElementById('portfolio-carousel');
-            const portfolioGrid = document.querySelector('.portfolio-grid');
             
-            if (portfolioCarousel && portfolioGrid) {
-                // Clone portfolio items for infinite loop
-                const portfolioItems = portfolioGrid.querySelectorAll('.portfolio-item');
-                portfolioItems.forEach(item => {
-                    const clone = item.cloneNode(true);
-                    portfolioCarousel.appendChild(clone);
+            // Portfolio images
+            const portfolioImages = [
+                'https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                'https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+            ];
+            
+            if (portfolioCarousel) {
+                // Clear any existing content
+                portfolioCarousel.innerHTML = '';
+                
+                // Create portfolio items for carousel
+                portfolioImages.forEach(src => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'portfolio-item';
+                    itemElement.innerHTML = `
+                        <img data-src="${src}" alt="Nail Design" class="lazy">
+                    `;
+                    portfolioCarousel.appendChild(itemElement);
                 });
                 
                 // Duplicate the items for seamless looping
-                portfolioItems.forEach(item => {
-                    const clone = item.cloneNode(true);
-                    portfolioCarousel.appendChild(clone);
+                portfolioImages.forEach(src => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'portfolio-item';
+                    itemElement.innerHTML = `
+                        <img data-src="${src}" alt="Nail Design" class="lazy">
+                    `;
+                    portfolioCarousel.appendChild(itemElement);
                 });
                 
                 // Set up animation
                 let portfolioPosition = 0;
                 const portfolioSpeed = 0.7; // pixels per frame
-                const portfolioInterval = 16; // ~60fps
                 
                 function animatePortfolio() {
                     portfolioPosition -= portfolioSpeed;
                     
                     // Reset position when we've scrolled through one set of items
                     const itemWidth = 300 + 30; // width + gap
-                    const totalWidth = portfolioItems.length * itemWidth;
+                    const totalWidth = portfolioImages.length * itemWidth;
                     
                     if (Math.abs(portfolioPosition) >= totalWidth) {
                         portfolioPosition = 0;
@@ -1404,6 +1415,9 @@
                 }
                 
                 animatePortfolio();
+                
+                // Lazy load images
+                lazyLoadImages();
             }
         }
 
