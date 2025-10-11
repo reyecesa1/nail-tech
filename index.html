@@ -361,7 +361,7 @@
             font-size: 1.1rem; /* Larger about text */
         }
 
-        /* Services Page - Auto Carousel for Desktop, Grid for Mobile */
+        /* Services Page - Auto Carousel for Desktop, Card Stack for Mobile */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -599,6 +599,109 @@
             cursor: pointer;
         }
 
+        /* Mobile Card Stack Styles */
+        .mobile-card-stack-container {
+            position: relative;
+            height: 500px;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            perspective: 1000px;
+            display: none;
+        }
+
+        .mobile-card-stack {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .stack-card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--primary);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.6s ease, opacity 0.6s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px) scale(0.9);
+            backface-visibility: hidden;
+        }
+
+        .stack-card.active {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            z-index: 3;
+        }
+
+        .stack-card.next {
+            opacity: 0.7;
+            transform: translateY(20px) scale(0.95);
+            z-index: 2;
+        }
+
+        .stack-card.previous {
+            opacity: 0.4;
+            transform: translateY(40px) scale(0.9);
+            z-index: 1;
+        }
+
+        .stack-card.hidden {
+            opacity: 0;
+            transform: translateY(60px) scale(0.85);
+            z-index: 0;
+        }
+
+        .stack-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .stack-card .service-icon {
+            margin-bottom: 20px;
+        }
+
+        .stack-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .stack-card p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .stack-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        .stack-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--gray);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .stack-indicator.active {
+            background-color: var(--accent);
+            transform: scale(1.2);
+        }
+
         /* Responsive Styles */
         @media (max-width: 992px) {
             .about-content, .contact-container {
@@ -635,22 +738,22 @@
                 font-size: 2.5rem;
             }
             
-            /* Hide carousels on mobile, show grid */
+            /* Hide carousels and grids on mobile, show card stacks */
             .services-carousel-container,
-            .portfolio-carousel-container {
+            .portfolio-carousel-container,
+            .services-grid,
+            .portfolio-grid {
                 display: none;
             }
             
-            .services-grid,
-            .portfolio-grid {
-                display: grid;
+            .mobile-card-stack-container {
+                display: block;
             }
         }
 
         @media (min-width: 769px) {
-            /* Hide grid on desktop, show carousels */
-            .services-grid,
-            .portfolio-grid {
+            /* Hide card stacks on desktop, show carousels */
+            .mobile-card-stack-container {
                 display: none;
             }
             
@@ -669,12 +772,20 @@
                 font-size: 2.2rem;
             }
             
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .logo {
                 font-size: 1.8rem;
+            }
+            
+            .mobile-card-stack-container {
+                height: 450px;
+            }
+            
+            .stack-card {
+                padding: 20px;
+            }
+            
+            .stack-card img {
+                height: 200px;
             }
         }
     </style>
@@ -739,7 +850,7 @@
         <div class="container section">
             <h2 class="section-title">Services</h2>
             
-            <!-- Services Grid for Mobile -->
+            <!-- Services Grid for Desktop -->
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
@@ -781,6 +892,50 @@
                     <!-- Service cards will be duplicated here by JavaScript -->
                 </div>
             </div>
+            
+            <!-- Services Card Stack for Mobile -->
+            <div class="mobile-card-stack-container" id="services-stack">
+                <div class="mobile-card-stack" id="services-stack-inner">
+                    <div class="stack-card active" data-index="0">
+                        <div class="service-icon">
+                            <i class="fas fa-hand-sparkles"></i>
+                        </div>
+                        <h3>Classic Manicure</h3>
+                        <p>A traditional manicure focusing on nail health and beauty with shaping, cuticle care, and polish.</p>
+                        <p class="price">$35</p>
+                    </div>
+                    <div class="stack-card next" data-index="1">
+                        <div class="service-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3>Gel Manicure</h3>
+                        <p>Long-lasting, chip-resistant gel polish with a glossy finish that lasts for weeks.</p>
+                        <p class="price">$50</p>
+                    </div>
+                    <div class="stack-card previous" data-index="2">
+                        <div class="service-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>Nail Art</h3>
+                        <p>Custom nail designs from simple accents to detailed artwork for a personalized look.</p>
+                        <p class="price">$15+</p>
+                    </div>
+                    <div class="stack-card hidden" data-index="3">
+                        <div class="service-icon">
+                            <i class="fas fa-spa"></i>
+                        </div>
+                        <h3>Nail Care</h3>
+                        <p>Restorative treatments to strengthen and nourish nails, promoting long-term health.</p>
+                        <p class="price">$45</p>
+                    </div>
+                </div>
+                <div class="stack-indicators" id="services-indicators">
+                    <div class="stack-indicator active" data-index="0"></div>
+                    <div class="stack-indicator" data-index="1"></div>
+                    <div class="stack-indicator" data-index="2"></div>
+                    <div class="stack-indicator" data-index="3"></div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -789,7 +944,7 @@
         <div class="container section">
             <h2 class="section-title">My Work</h2>
             
-            <!-- Portfolio Grid for Mobile -->
+            <!-- Portfolio Grid for Desktop -->
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Design" class="lazy">
@@ -815,6 +970,38 @@
             <div class="portfolio-carousel-container">
                 <div class="portfolio-carousel-track" id="portfolio-carousel">
                     <!-- Portfolio items will be duplicated here by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Portfolio Card Stack for Mobile -->
+            <div class="mobile-card-stack-container" id="portfolio-stack">
+                <div class="mobile-card-stack" id="portfolio-stack-inner">
+                    <div class="stack-card active" data-index="0">
+                        <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Design" class="lazy">
+                        <h3>Elegant French Tips</h3>
+                        <p>Classic french manicure with a modern twist.</p>
+                    </div>
+                    <div class="stack-card next" data-index="1">
+                        <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Design" class="lazy">
+                        <h3>Floral Nail Art</h3>
+                        <p>Delicate floral patterns on a soft pink base.</p>
+                    </div>
+                    <div class="stack-card previous" data-index="2">
+                        <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Design" class="lazy">
+                        <h3>Geometric Design</h3>
+                        <p>Modern geometric patterns in contrasting colors.</p>
+                    </div>
+                    <div class="stack-card hidden" data-index="3">
+                        <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Design" class="lazy">
+                        <h3>Sparkling Glitter</h3>
+                        <p>Glamorous glitter accents for special occasions.</p>
+                    </div>
+                </div>
+                <div class="stack-indicators" id="portfolio-indicators">
+                    <div class="stack-indicator active" data-index="0"></div>
+                    <div class="stack-indicator" data-index="1"></div>
+                    <div class="stack-indicator" data-index="2"></div>
+                    <div class="stack-indicator" data-index="3"></div>
                 </div>
             </div>
         </div>
@@ -933,7 +1120,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 NatiNails. Swiftsite. All rights reserved.</p>
+                <p>&copy; 2023 NatiNails. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -973,7 +1160,166 @@
             }
         };
 
-        // Auto Carousel Functionality
+        // Mobile Card Stack Functionality
+        function initMobileCardStacks() {
+            // Only initialize on mobile
+            if (window.innerWidth > 768) return;
+            
+            // Services Card Stack
+            const servicesStack = document.getElementById('services-stack-inner');
+            const servicesCards = servicesStack.querySelectorAll('.stack-card');
+            const servicesIndicators = document.getElementById('services-indicators').querySelectorAll('.stack-indicator');
+            let servicesCurrentIndex = 0;
+            let servicesAutoSlideInterval;
+            
+            // Portfolio Card Stack
+            const portfolioStack = document.getElementById('portfolio-stack-inner');
+            const portfolioCards = portfolioStack.querySelectorAll('.stack-card');
+            const portfolioIndicators = document.getElementById('portfolio-indicators').querySelectorAll('.stack-indicator');
+            let portfolioCurrentIndex = 0;
+            let portfolioAutoSlideInterval;
+            
+            // Function to update card positions for a stack
+            function updateCardStack(cards, indicators, currentIndex) {
+                cards.forEach((card, index) => {
+                    card.classList.remove('active', 'next', 'previous', 'hidden');
+                    
+                    if (index === currentIndex) {
+                        card.classList.add('active');
+                    } else if (index === (currentIndex + 1) % cards.length) {
+                        card.classList.add('next');
+                    } else if (index === (currentIndex - 1 + cards.length) % cards.length) {
+                        card.classList.add('previous');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+                
+                // Update indicators
+                indicators.forEach((indicator, index) => {
+                    indicator.classList.toggle('active', index === currentIndex);
+                });
+            }
+            
+            // Function to advance to next card in a stack
+            function nextCard(cards, indicators, currentIndex) {
+                return (currentIndex + 1) % cards.length;
+            }
+            
+            // Function to go to previous card in a stack
+            function prevCard(cards, indicators, currentIndex) {
+                return (currentIndex - 1 + cards.length) % cards.length;
+            }
+            
+            // Initialize both stacks
+            updateCardStack(servicesCards, servicesIndicators, servicesCurrentIndex);
+            updateCardStack(portfolioCards, portfolioIndicators, portfolioCurrentIndex);
+            
+            // Set up auto-advance for services stack
+            function startServicesAutoSlide() {
+                servicesAutoSlideInterval = setInterval(() => {
+                    servicesCurrentIndex = nextCard(servicesCards, servicesIndicators, servicesCurrentIndex);
+                    updateCardStack(servicesCards, servicesIndicators, servicesCurrentIndex);
+                }, 4000); // Change card every 4 seconds
+            }
+            
+            // Set up auto-advance for portfolio stack
+            function startPortfolioAutoSlide() {
+                portfolioAutoSlideInterval = setInterval(() => {
+                    portfolioCurrentIndex = nextCard(portfolioCards, portfolioIndicators, portfolioCurrentIndex);
+                    updateCardStack(portfolioCards, portfolioIndicators, portfolioCurrentIndex);
+                }, 4000); // Change card every 4 seconds
+            }
+            
+            // Start auto-sliding
+            startServicesAutoSlide();
+            startPortfolioAutoSlide();
+            
+            // Add click events to indicators for services
+            servicesIndicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    servicesCurrentIndex = index;
+                    updateCardStack(servicesCards, servicesIndicators, servicesCurrentIndex);
+                    
+                    // Reset auto-slide timer
+                    clearInterval(servicesAutoSlideInterval);
+                    startServicesAutoSlide();
+                });
+            });
+            
+            // Add click events to indicators for portfolio
+            portfolioIndicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    portfolioCurrentIndex = index;
+                    updateCardStack(portfolioCards, portfolioIndicators, portfolioCurrentIndex);
+                    
+                    // Reset auto-slide timer
+                    clearInterval(portfolioAutoSlideInterval);
+                    startPortfolioAutoSlide();
+                });
+            });
+            
+            // Add swipe functionality for services stack
+            let servicesStartX = 0;
+            let servicesEndX = 0;
+            
+            servicesStack.addEventListener('touchstart', (e) => {
+                servicesStartX = e.touches[0].clientX;
+            });
+            
+            servicesStack.addEventListener('touchend', (e) => {
+                servicesEndX = e.changedTouches[0].clientX;
+                handleSwipe(servicesStartX, servicesEndX, 'services');
+            });
+            
+            // Add swipe functionality for portfolio stack
+            let portfolioStartX = 0;
+            let portfolioEndX = 0;
+            
+            portfolioStack.addEventListener('touchstart', (e) => {
+                portfolioStartX = e.touches[0].clientX;
+            });
+            
+            portfolioStack.addEventListener('touchend', (e) => {
+                portfolioEndX = e.changedTouches[0].clientX;
+                handleSwipe(portfolioStartX, portfolioEndX, 'portfolio');
+            });
+            
+            // Handle swipe gesture
+            function handleSwipe(startX, endX, stackType) {
+                const swipeThreshold = 50; // Minimum swipe distance
+                
+                if (startX - endX > swipeThreshold) {
+                    // Swipe left - next card
+                    if (stackType === 'services') {
+                        servicesCurrentIndex = nextCard(servicesCards, servicesIndicators, servicesCurrentIndex);
+                        updateCardStack(servicesCards, servicesIndicators, servicesCurrentIndex);
+                        clearInterval(servicesAutoSlideInterval);
+                        startServicesAutoSlide();
+                    } else {
+                        portfolioCurrentIndex = nextCard(portfolioCards, portfolioIndicators, portfolioCurrentIndex);
+                        updateCardStack(portfolioCards, portfolioIndicators, portfolioCurrentIndex);
+                        clearInterval(portfolioAutoSlideInterval);
+                        startPortfolioAutoSlide();
+                    }
+                } else if (endX - startX > swipeThreshold) {
+                    // Swipe right - previous card
+                    if (stackType === 'services') {
+                        servicesCurrentIndex = prevCard(servicesCards, servicesIndicators, servicesCurrentIndex);
+                        updateCardStack(servicesCards, servicesIndicators, servicesCurrentIndex);
+                        clearInterval(servicesAutoSlideInterval);
+                        startServicesAutoSlide();
+                    } else {
+                        portfolioCurrentIndex = prevCard(portfolioCards, portfolioIndicators, portfolioCurrentIndex);
+                        updateCardStack(portfolioCards, portfolioIndicators, portfolioCurrentIndex);
+                        clearInterval(portfolioAutoSlideInterval);
+                        startPortfolioAutoSlide();
+                    }
+                }
+            }
+        }
+
+        // Auto Carousel Functionality for Desktop
         function initAutoCarousels() {
             // Only initialize on desktop
             if (window.innerWidth <= 768) return;
@@ -1078,11 +1424,15 @@
             showPage('home');
             updateHeroContent('home');
             
-            // Initialize auto carousels
+            // Initialize auto carousels for desktop and card stacks for mobile
             initAutoCarousels();
+            initMobileCardStacks();
             
-            // Reinitialize carousels on window resize
-            window.addEventListener('resize', initAutoCarousels);
+            // Reinitialize on window resize
+            window.addEventListener('resize', function() {
+                initAutoCarousels();
+                initMobileCardStacks();
+            });
             
             // Add click event to navigation links
             navLinks.forEach(link => {
