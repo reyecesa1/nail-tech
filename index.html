@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NatiNails | Professional Nail Tech</title>
+    <title>NatiNails | Professional Nail Services</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Base Styles */
@@ -153,7 +153,7 @@
             font-family: 'Cormorant Garamond', serif;
             font-size: 2.2rem; /* Larger logo */
             font-weight: 700; /* Bolder logo */
-            color: var(--light); /* Light text for contrast */
+            color: var(--accent); /* Changed to accent color to match hover state */
             cursor: pointer;
         }
 
@@ -258,16 +258,41 @@
             color: var(--accent);
         }
 
-        /* Hero Section */
+        /* Hero Section with Minimalist Strawberry Pattern */
         .hero-section {
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: linear-gradient(rgba(249, 247, 242, 0.85), rgba(249, 247, 242, 0.9)), 
-                        url('https://images.unsplash.com/photo-1607778833979-44b6e943eba9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
+            background: 
+                linear-gradient(rgba(249, 247, 242, 0.85), rgba(249, 247, 242, 0.9)),
+                /* Minimalist strawberry pattern */
+                radial-gradient(circle at 20% 30%, #ff6b6b 2px, transparent 3px),
+                radial-gradient(circle at 80% 20%, #ff6b6b 2px, transparent 3px),
+                radial-gradient(circle at 40% 70%, #ff6b6b 2px, transparent 3px),
+                radial-gradient(circle at 70% 80%, #ff6b6b 2px, transparent 3px),
+                radial-gradient(circle at 10% 50%, #ff6b6b 2px, transparent 3px),
+                radial-gradient(circle at 90% 60%, #ff6b6b 2px, transparent 3px),
+                radial-gradient(circle at 30% 10%, #ff6b6b 2px, transparent 3px),
+                radial-gradient(circle at 60% 40%, #ff6b6b 2px, transparent 3px),
+                /* Green crowns */
+                radial-gradient(ellipse at 20% 28%, #a8e6cf 4px, transparent 5px),
+                radial-gradient(ellipse at 80% 18%, #a8e6cf 4px, transparent 5px),
+                radial-gradient(ellipse at 40% 68%, #a8e6cf 4px, transparent 5px),
+                radial-gradient(ellipse at 70% 78%, #a8e6cf 4px, transparent 5px),
+                radial-gradient(ellipse at 10% 48%, #a8e6cf 4px, transparent 5px),
+                radial-gradient(ellipse at 90% 58%, #a8e6cf 4px, transparent 5px),
+                radial-gradient(ellipse at 30% 8%, #a8e6cf 4px, transparent 5px),
+                radial-gradient(ellipse at 60% 38%, #a8e6cf 4px, transparent 5px);
+            background-size: 200px 200px, 200px 200px, 200px 200px, 200px 200px, 
+                            200px 200px, 200px 200px, 200px 200px, 200px 200px,
+                            200px 200px, 200px 200px, 200px 200px, 200px 200px,
+                            200px 200px, 200px 200px, 200px 200px, 200px 200px;
+            background-position: 0 0, 50px 100px, 100px 50px, 150px 150px,
+                                200px 0, 250px 100px, 300px 50px, 350px 150px,
+                                0 0, 50px 100px, 100px 50px, 150px 150px,
+                                200px 0, 250px 100px, 300px 50px, 350px 150px;
+            background-color: #ffffff;
             min-height: calc(100vh - 80px);
             margin-top: 80px;
             transition: all 0.5s ease;
@@ -526,7 +551,7 @@
             font-size: 2rem; /* Larger footer logo */
             font-weight: 700; /* Bolder footer logo */
             margin-bottom: 20px;
-            color: var(--light);
+            color: var(--accent); /* Changed to accent color to match header */
         }
 
         .footer-column h3 {
@@ -685,7 +710,7 @@
     <section id="hero" class="hero-section">
         <div class="container hero-content">
             <h1 id="hero-title">Professional Nail Services</h1>
-            <p id="hero-description">Bringing quality nail services in Spring, TX. Experience convenience and beauty with our nail care.</p>
+            <p id="hero-description">Bringing quality nail services to your home in Spring, TX. Experience convenience and beauty with our mobile nail care.</p>
             <a class="btn view-work-btn" id="hero-button">View Our Work</a>
         </div>
     </section>
@@ -700,10 +725,10 @@
                 </div>
                 <div class="about-text">
                     <h2>Professional Nail Services in Spring, TX</h2>
-                    <p>With a cosmetology liscence and over five years of dedicated experience in nail care, I've developed a professional approach that combines technical skill with attention to detail. My focus is on providing quality nail services with convenience.</p>
+                    <p>With over five years of dedicated experience in nail care, I've developed a professional approach that combines technical skill with attention to detail. My focus is on providing quality nail services with convenience.</p>
                     <p>I specialize in classic nail designs, gel manicures, and nail care treatments that emphasize both beauty and health. Each service is a personalized experience, tailored to your preferences and schedule.</p>
-                    <p>Nail services based in Spring, TX, I bring the salon experience directly to your home. I use only high-quality products that are gentle on your nails while delivering beautiful, lasting results.</p>
-                    <a class="btn" id="about-contact-btn">Book a Service!</a>
+                    <p>As a mobile nail service based in Spring, TX, I bring the salon experience directly to your home. I use only high-quality products that are gentle on your nails while delivering beautiful, lasting results.</p>
+                    <a class="btn" id="about-contact-btn">Book a Service</a>
                 </div>
             </div>
         </div>
@@ -802,7 +827,7 @@
             <div class="contact-container">
                 <div class="contact-info">
                     <h3>Book a Service</h3>
-                    <p>Schedule an appointment for professional nail services in your area. Serving Spring, TX and surrounding areas.</p>
+                    <p>Schedule an appointment for professional nail services in the comfort of your home. Serving Spring, TX and surrounding areas.</p>
                     
                     <div class="contact-item">
                         <div class="contact-icon">
@@ -874,7 +899,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <div class="footer-logo">NatiNails</div>
-                    <p>Professional nail services in Spring, TX.</p>
+                    <p>Professional nail services in Spring, TX. Bringing quality nail care directly to your home.</p>
                     <div class="social-links">
                         <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
@@ -911,7 +936,7 @@
             </div>
             
             <div class="footer-bottom">
-                <p>&copy; 2025 NatiNails. All rights reserved.</p>
+                <p>&copy; 2023 NatiNails. All rights reserved.</p>
             </div>
         </div>
     </footer>
