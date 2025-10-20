@@ -752,8 +752,13 @@
         }
 
         @media (min-width: 769px) {
-            /* Hide card stacks on desktop, show carousels */
+            /* Hide card stacks and grids on desktop, show carousels */
             .mobile-card-stack-container {
+                display: none;
+            }
+            
+            .services-grid,
+            .portfolio-grid {
                 display: none;
             }
             
@@ -850,7 +855,7 @@
         <div class="container section">
             <h2 class="section-title">Services</h2>
             
-            <!-- Services Grid for Desktop -->
+            <!-- Services Grid for Desktop - HIDDEN ON DESKTOP -->
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
@@ -886,7 +891,7 @@
                 </div>
             </div>
             
-            <!-- Services Carousel for Desktop -->
+            <!-- Services Carousel for Desktop - VISIBLE ON DESKTOP -->
             <div class="services-carousel-container">
                 <div class="services-carousel-track" id="services-carousel">
                     <!-- Service cards will be duplicated here by JavaScript -->
@@ -944,7 +949,7 @@
         <div class="container section">
             <h2 class="section-title">My Work</h2>
             
-            <!-- Portfolio Grid for Desktop -->
+            <!-- Portfolio Grid for Desktop - HIDDEN ON DESKTOP -->
             <div class="portfolio-grid">
                 <div class="portfolio-item">
                     <img data-src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Nail Design" class="lazy">
@@ -966,7 +971,7 @@
                 </div>
             </div>
             
-            <!-- Portfolio Carousel for Desktop -->
+            <!-- Portfolio Carousel for Desktop - VISIBLE ON DESKTOP -->
             <div class="portfolio-carousel-container">
                 <div class="portfolio-carousel-track" id="portfolio-carousel">
                     <!-- Portfolio items will be duplicated here by JavaScript -->
