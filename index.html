@@ -258,49 +258,43 @@
             color: var(--accent);
         }
 
-        /* Hero Section with Minimalist Strawberry Pattern */
+        /* Hero Section with Video Background */
         .hero-section {
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: 
-                linear-gradient(rgba(249, 247, 242, 0.85), rgba(249, 247, 242, 0.9)),
-                /* Minimalist strawberry pattern */
-                radial-gradient(circle at 20% 30%, #ff6b6b 2px, transparent 3px),
-                radial-gradient(circle at 80% 20%, #ff6b6b 2px, transparent 3px),
-                radial-gradient(circle at 40% 70%, #ff6b6b 2px, transparent 3px),
-                radial-gradient(circle at 70% 80%, #ff6b6b 2px, transparent 3px),
-                radial-gradient(circle at 10% 50%, #ff6b6b 2px, transparent 3px),
-                radial-gradient(circle at 90% 60%, #ff6b6b 2px, transparent 3px),
-                radial-gradient(circle at 30% 10%, #ff6b6b 2px, transparent 3px),
-                radial-gradient(circle at 60% 40%, #ff6b6b 2px, transparent 3px),
-                /* Green crowns */
-                radial-gradient(ellipse at 20% 28%, #a8e6cf 4px, transparent 5px),
-                radial-gradient(ellipse at 80% 18%, #a8e6cf 4px, transparent 5px),
-                radial-gradient(ellipse at 40% 68%, #a8e6cf 4px, transparent 5px),
-                radial-gradient(ellipse at 70% 78%, #a8e6cf 4px, transparent 5px),
-                radial-gradient(ellipse at 10% 48%, #a8e6cf 4px, transparent 5px),
-                radial-gradient(ellipse at 90% 58%, #a8e6cf 4px, transparent 5px),
-                radial-gradient(ellipse at 30% 8%, #a8e6cf 4px, transparent 5px),
-                radial-gradient(ellipse at 60% 38%, #a8e6cf 4px, transparent 5px);
-            background-size: 200px 200px, 200px 200px, 200px 200px, 200px 200px, 
-                            200px 200px, 200px 200px, 200px 200px, 200px 200px,
-                            200px 200px, 200px 200px, 200px 200px, 200px 200px,
-                            200px 200px, 200px 200px, 200px 200px, 200px 200px;
-            background-position: 0 0, 50px 100px, 100px 50px, 150px 150px,
-                                200px 0, 250px 100px, 300px 50px, 350px 150px,
-                                0 0, 50px 100px, 100px 50px, 150px 150px,
-                                200px 0, 250px 100px, 300px 50px, 350px 150px;
-            background-color: #ffffff;
             min-height: calc(100vh - 80px);
             margin-top: 80px;
-            transition: all 0.5s ease;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(249, 247, 242, 0.7); /* Cream overlay with transparency */
+            z-index: -1;
         }
 
         .hero-content {
             max-width: 800px;
             animation: fadeInUp 0.8s ease;
+            position: relative;
+            z-index: 1;
         }
 
         @keyframes fadeInUp {
@@ -822,8 +816,13 @@
         </div>
     </header>
 
-    <!-- Hero Section (Dynamic) -->
+    <!-- Hero Section with Video Background -->
     <section id="hero" class="hero-section">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="nati.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="hero-overlay"></div>
         <div class="container hero-content">
             <h1 id="hero-title">Professional Nail Services</h1>
             <p id="hero-description">Bringing quality nail services in Spring, TX. Experience convenience and beauty with your favorite nail Tech!.</p>
